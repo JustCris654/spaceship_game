@@ -10,8 +10,10 @@ class Game {
 
     private:
         void processEvents();
-        void update();
+        void update(sf::Time);
         void render();
+
+        void handlePlayerInput(sf::Keyboard::Key, bool);
 
     private:
         sf::RenderWindow mWindow;
@@ -20,7 +22,9 @@ class Game {
         bool mIsMovingDown;
         bool mIsMovingRight;
         bool mIsMovingLeft;
-        void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+
+        const float PlayerSpeed{600.f};
+        const sf::Time TimePerFrame{sf::seconds(1.f / 60.f)};
 };
 
 #endif // GAME_H_

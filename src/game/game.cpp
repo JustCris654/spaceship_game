@@ -15,9 +15,21 @@ Game::Game()
 }
 
 void Game::run() {
+    sf::Clock clock;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while (mWindow.isOpen()) {
         processEvents();
-        update();
+
+        // this while loop ensure that every frame has the same lenght
+        // which is, in this case, 1/60 of a second (60fps)
+        timeSinceLastUpdate += clock.restart();
+        while (timeSinceLastUpdate > TimePerFrame) {
+            std::cout << timeSinceLastUpdate.asMilliseconds() << std::endl;
+            timeSinceLastUpdate -= TimePerFrame;
+            processEvents();
+            update(TimePerFrame);
+        }
+
         render();
     }
 }
@@ -31,7 +43,9 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
         mIsMovingDown = isPressed;
     } else if (key == sf::Keyboard::A) {
         mIsMovingLeft = isPressed;
-    } else if (isPressed == false && key == sf::Keyboard::Escape) {      // pressing ESC will close the game
+    } else if (isPressed == false &&
+               key ==
+                   sf::Keyboard::Escape) {  // pressing ESC will close the game
         mWindow.close();
     }
 }
@@ -49,26 +63,25 @@ void Game::processEvents() {
             case sf::Event::Closed:
                 mWindow.close();
                 break;
-     
+
             default:
                 break;
         }
     }
 }
 
-void Game::update() {
+void Game::update(sf::Time dt) {
     sf::Vector2f movement(0.f, 0.f);
     if (mIsMovingUp) {
-        movement.y -= .5f;
+        movement.y -= PlayerSpeed;
     } else if (mIsMovingDown) {
-        movement.y += .5f;
+        movement.y += PlayerSpeed;
     } else if (mIsMovingLeft) {
-        movement.x -= .5f;
+        movement.x -= PlayerSpeed;
     } else if (mIsMovingRight) {
-        movement.x += .5f;
+        movement.x += PlayerSpeed;
     }
-
-    mPlayer.move(movement);
+    mPlayer.move(movement * dt.asSeconds());
 }
 
 void Game::render() {

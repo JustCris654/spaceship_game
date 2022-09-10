@@ -15,7 +15,7 @@ $(OBJDIR)/main.o: src/main.cpp
 
 
 clean:
-	rm *.o spaceship_game
+	rm build/objs/*.o build/spaceship_game
 
 cleanobj:
-	rm *.o
+	rm build/objs/*.o
