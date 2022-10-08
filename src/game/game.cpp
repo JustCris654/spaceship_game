@@ -4,14 +4,21 @@
 
 Game::Game()
     : mWindow(sf::VideoMode(1280, 960), "SFML Application"),
+      mTexture(),
       mPlayer(),
       mIsMovingUp{false},
       mIsMovingDown{false},
       mIsMovingRight{false},
       mIsMovingLeft{false} {
-    mPlayer.setRadius(40.f);
+    // load texture to sprite
+    if (!mTexture.loadFromFile("src/Media/Textures/Eagle.png")) {
+        std::cout << "Cannot load texture" << std::endl;
+        exit(1);
+    }
+    mPlayer.setTexture(mTexture);
     mPlayer.setPosition(100.f, 100.f);
-    mPlayer.setFillColor(sf::Color::Cyan);
+
+    // mWindow.setVerticalSyncEnabled(true);     // enable vsync
 }
 
 void Game::run() {
@@ -24,12 +31,12 @@ void Game::run() {
         // which is, in this case, 1/60 of a second (60fps)
         timeSinceLastUpdate += clock.restart();
         while (timeSinceLastUpdate > TimePerFrame) {
-            std::cout << timeSinceLastUpdate.asMilliseconds() << std::endl;
+            std::cout << "FPS: " << 1 / timeSinceLastUpdate.asSeconds()
+                      << std::endl;
             timeSinceLastUpdate -= TimePerFrame;
             processEvents();
             update(TimePerFrame);
         }
-
         render();
     }
 }

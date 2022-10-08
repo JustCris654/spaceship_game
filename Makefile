@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall 
-SFMLFLAGS = -I/opt/homebrew/Cellar/sfml/2.5.1_1/include
-LINKEROPTIONS = -L/opt/homebrew/Cellar/sfml/2.5.1_1/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+SFMLFLAGS = -I/opt/homebrew/Cellar/sfml/2.5.1_2/include
+LINKEROPTIONS = -L/opt/homebrew/Cellar/sfml/2.5.1_2/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 OBJDIR = build/objs
 
 output: $(OBJDIR)/main.o $(OBJDIR)/game.o
