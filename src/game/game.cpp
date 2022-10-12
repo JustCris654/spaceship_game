@@ -6,16 +6,15 @@ Game::Game()
     : mWindow(sf::VideoMode(1280, 960), "SFML Application"),
       mTexture(),
       mPlayer(),
+      textures(),
       mIsMovingUp{false},
       mIsMovingDown{false},
       mIsMovingRight{false},
       mIsMovingLeft{false} {
-    // load texture to sprite
-    if (!mTexture.loadFromFile("src/Media/Textures/Eagle.png")) {
-        std::cout << "Cannot load texture" << std::endl;
-        exit(1);
-    }
-    mPlayer.setTexture(mTexture);
+
+    textures.load(Textures::Airplane, "src/Media/Textures/Eagle.png");
+
+    mPlayer.setTexture(textures.get(Textures::Airplane));
     mPlayer.setPosition(100.f, 100.f);
 
     // sf::Font font;

@@ -2,8 +2,11 @@
 #define TEXTURE_HOLDER_H_
 
 #include <SFML/Graphics.hpp>
-#include <map>
+
 #include "textures.hpp"
+
+#include <map>
+#include <iostream>
 
 class TextureHolder {
     public:
