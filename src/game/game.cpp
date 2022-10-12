@@ -18,6 +18,13 @@ Game::Game()
     mPlayer.setTexture(mTexture);
     mPlayer.setPosition(100.f, 100.f);
 
+    // sf::Font font;
+    // if (!font.loadFromFile("src/Media/Fonts/FiraCode-Regular.ttf")) {
+    //     fprintf(stderr, "Cannot load font from memory\n");
+    //     exit(1);
+    // }
+    // text.setFont(font);
+
     // mWindow.setVerticalSyncEnabled(true);     // enable vsync
 }
 

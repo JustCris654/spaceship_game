@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall 
+CXXFLAGS = -std=c++20 -Wall -Wextra -g 
 SFMLFLAGS = -I/opt/homebrew/Cellar/sfml/2.5.1_2/include
 LINKEROPTIONS = -L/opt/homebrew/Cellar/sfml/2.5.1_2/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 OBJDIR = build/objs
