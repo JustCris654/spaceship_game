@@ -13,12 +13,13 @@ void TextureHolder::load(Textures::ID id, const std::string& filename) {
     std::unique_ptr<sf::Texture> texture(new sf::Texture());
 
     if(!texture->loadFromFile(filename)) {
-        std::cout << "Cannot load texture" << std::endl;
-        exit(1);
+        throw std::runtime_error("TextureHolder::load - Failed to load " + filename);
     }
 
-    mTextureMap.insert(std::make_pair(id, std::move(texture)));
-    std::cout << "Done!" << std::endl;
+    // std::pair<std::map<Textures::ID, std::unique_ptr<sf::Texture>>::iterator, bool> inserted =
+    // mTextureMap.insert(std::make_pair(id, std::move(texture)));
+    auto inserted = mTextureMap.insert(std::make_pair(id, std::move(texture)));
+    assert(inserted.second);
 }
 
 // given the id return the associated texture
