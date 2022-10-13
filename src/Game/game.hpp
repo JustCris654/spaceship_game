@@ -20,6 +20,7 @@ class Game {
     sf::RenderWindow mWindow;
     sf::Texture mTexture;
     sf::Sprite mPlayer;
+    sf::Sprite mLandScape;
 
     TextureHolder textures;
 

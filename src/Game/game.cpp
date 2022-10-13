@@ -3,9 +3,10 @@
 #include <iostream>
 
 Game::Game()
-    : mWindow(sf::VideoMode(1280, 960), "SFML Application"),
+    : mWindow(sf::VideoMode(1280, 960), "Spaceship game"),
       mTexture(),
       mPlayer(),
+      mLandScape(),
       textures(),
       mIsMovingUp{false},
       mIsMovingDown{false},
@@ -13,18 +14,17 @@ Game::Game()
       mIsMovingLeft{false} {
 
     textures.load(Textures::Airplane, "src/Media/Textures/Eagle.png");
+    textures.load(Textures::Missile, "src/Media/Textures/Missile.png");
+    textures.load(Textures::Landscape, "src/Media/Textures/Desert.png");
 
+    // set player texture
     mPlayer.setTexture(textures.get(Textures::Airplane));
     mPlayer.setPosition(100.f, 100.f);
 
-    // sf::Font font;
-    // if (!font.loadFromFile("src/Media/Fonts/FiraCode-Regular.ttf")) {
-    //     fprintf(stderr, "Cannot load font from memory\n");
-    //     exit(1);
-    // }
-    // text.setFont(font);
-
-    // mWindow.setVerticalSyncEnabled(true);     // enable vsync
+    // set landscape texture
+    mLandScape.setTexture(textures.get(Textures::Landscape));
+    mLandScape.setPosition(0.f, 0.f);
+    mLandScape.setScale(1.3, 1.3);
 }
 
 void Game::run() {
@@ -99,6 +99,7 @@ void Game::update(sf::Time dt) {
 
 void Game::render() {
     mWindow.clear();
+    mWindow.draw(mLandScape);
     mWindow.draw(mPlayer);
     mWindow.display();
 }
