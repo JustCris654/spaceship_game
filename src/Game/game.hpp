@@ -2,6 +2,7 @@
 #define GAME_H_
 
 #include <SFML/Graphics.hpp>
+#include "../Resources/resource_holder.hpp"
 
 class Game {
    public:
@@ -19,6 +20,9 @@ class Game {
     sf::RenderWindow mWindow;
     sf::Texture mTexture;
     sf::Sprite mPlayer;
+    sf::Sprite mLandScape;
+
+    ResourceHolder<sf::Texture, Textures::ID> textures;
 
     bool mIsMovingUp;
     bool mIsMovingDown;
