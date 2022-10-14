@@ -14,8 +14,8 @@ $(OBJDIR)/aircraft.o: src/Entities/Aircraft/Aircraft.cpp src/Entities/Aircraft/A
 $(OBJDIR)/base_entity.o: src/Entities/BaseEntity.cpp src/Entities/BaseEntity.hpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) $(LINKEROPTIONS) -c src/Entities/BaseEntity.cpp -o $(OBJDIR)/base_entity.o
 
-$(OBJDIR)/game.o: src/game/game.cpp src/game/game.hpp
-	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) $(LINKEROPTIONS) -c src/game/game.cpp -o $(OBJDIR)/game.o
+$(OBJDIR)/game.o: src/Game/Game.cpp src/Game/Game.hpp
+	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) $(LINKEROPTIONS) -c src/Game/Game.cpp -o $(OBJDIR)/game.o
 
 $(OBJDIR)/main.o: src/main.cpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) $(LINKEROPTIONS) -c src/main.cpp -o $(OBJDIR)/main.o
