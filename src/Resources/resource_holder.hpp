@@ -7,6 +7,7 @@
 
 #include <map>
 #include <iostream>
+#include <assert.h>
 
 template <typename Resource, typename Identifier>
 class ResourceHolder {
