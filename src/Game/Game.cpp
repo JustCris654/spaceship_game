@@ -88,11 +88,14 @@ void Game::update(sf::Time dt) {
     sf::Vector2f movement(0.f, 0.f);
     if (mIsMovingUp) {
         movement.y -= PlayerSpeed;
-    } else if (mIsMovingDown) {
+    }
+    if (mIsMovingDown) {
         movement.y += PlayerSpeed;
-    } else if (mIsMovingLeft) {
+    }
+    if (mIsMovingLeft) {
         movement.x -= PlayerSpeed;
-    } else if (mIsMovingRight) {
+    }
+    if (mIsMovingRight) {
         movement.x += PlayerSpeed;
     }
     mPlayer.move(movement * dt.asSeconds());
