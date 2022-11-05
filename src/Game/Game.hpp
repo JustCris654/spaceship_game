@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "../Resources/resource_holder.hpp"
 
+#include "../Utils/FpsCounter.hpp"
+
 class Game {
    public:
     Game();
@@ -22,6 +24,8 @@ class Game {
     sf::Sprite mPlayer;
     sf::Sprite mLandScape;
 
+    FpsCounter m_FpsCounter;
+
     ResourceHolder<sf::Texture, Textures::ID> textures;
 
     bool mIsMovingUp;
@@ -30,7 +34,7 @@ class Game {
     bool mIsMovingLeft;
 
     const float PlayerSpeed{600.f};
-    const sf::Time TimePerFrame{sf::seconds(1.f / 60.f)};
+    const sf::Time TimePerFrame{sf::seconds(1.f / 120.f)};
 
 
 };

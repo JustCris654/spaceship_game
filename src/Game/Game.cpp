@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "Game.hpp"
 
 #include <iostream>
 
@@ -7,6 +7,7 @@ Game::Game()
       mTexture(),
       mPlayer(),
       mLandScape(),
+      m_FpsCounter(),
       textures(),
       mIsMovingUp{false},
       mIsMovingDown{false},
@@ -37,8 +38,8 @@ void Game::run() {
         // which is, in this case, 1/60 of a second (60fps)
         timeSinceLastUpdate += clock.restart();
         while (timeSinceLastUpdate > TimePerFrame) {
-            std::cout << "FPS: " << 1 / timeSinceLastUpdate.asSeconds()
-                      << std::endl;
+            double fps = 1 / timeSinceLastUpdate.asSeconds();
+            m_FpsCounter.setText("FPS: " + std::to_string(fps));
             timeSinceLastUpdate -= TimePerFrame;
             processEvents();
             update(TimePerFrame);
@@ -87,11 +88,14 @@ void Game::update(sf::Time dt) {
     sf::Vector2f movement(0.f, 0.f);
     if (mIsMovingUp) {
         movement.y -= PlayerSpeed;
-    } else if (mIsMovingDown) {
+    }
+    if (mIsMovingDown) {
         movement.y += PlayerSpeed;
-    } else if (mIsMovingLeft) {
+    }
+    if (mIsMovingLeft) {
         movement.x -= PlayerSpeed;
-    } else if (mIsMovingRight) {
+    }
+    if (mIsMovingRight) {
         movement.x += PlayerSpeed;
     }
     mPlayer.move(movement * dt.asSeconds());
@@ -101,5 +105,7 @@ void Game::render() {
     mWindow.clear();
     mWindow.draw(mLandScape);
     mWindow.draw(mPlayer);
+
+    mWindow.draw(m_FpsCounter.getFpsCounter());
     mWindow.display();
 }
