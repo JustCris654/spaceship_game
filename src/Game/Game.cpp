@@ -1,9 +1,11 @@
 #include "Game.hpp"
-
 #include <iostream>
 
+const float WINDOW_SIZE_X = 1280;
+const float WINDOW_SIZE_Y = 960;
+
 Game::Game()
-    : mWindow(sf::VideoMode(1280, 960), "Spaceship game"),
+    : mWindow(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "Spaceship game"),
       mTexture(),
       mPlayer(),
       mLandScape(),
@@ -20,7 +22,7 @@ Game::Game()
 
     // set player texture
     mPlayer.setTexture(textures.get(Textures::Airplane));
-    mPlayer.setPosition(100.f, 100.f);
+    mPlayer.setPosition(WINDOW_SIZE_X / 2, WINDOW_SIZE_Y / 2);
 
     // set landscape texture
     mLandScape.setTexture(textures.get(Textures::Landscape));
@@ -99,6 +101,30 @@ void Game::update(sf::Time dt) {
         movement.x += PlayerSpeed;
     }
     mPlayer.move(movement * dt.asSeconds());
+
+    // get position relative to the center of the sprite
+    float size_x = mPlayer.getTexture()->getSize().x;
+    float size_y = mPlayer.getTexture()->getSize().y;
+
+    float pos_x = mPlayer.getPosition().x + size_x / 2;
+    float pos_y = mPlayer.getPosition().y + size_y / 2;
+
+    // std::cout << "size_x: " << size_x << " - size_y: " << size_y << std::endl;
+    // std::cout << "x: " << pos_x << " - y: " << pos_y << std::endl;
+    // std::cout << "abs x: " << mPlayer.getPosition().x << " - abs y: " << mPlayer.getPosition().y << std::endl;
+
+    if (pos_x <= 1) {
+        mPlayer.setPosition(WINDOW_SIZE_X - size_x / 2 - 1, mPlayer.getPosition().y);
+    } else if (pos_x >= WINDOW_SIZE_X) {
+        mPlayer.setPosition(-size_x / 2 + 1, mPlayer.getPosition().y);
+    }
+
+    if (pos_y <= 32) {
+        mPlayer.setPosition(mPlayer.getPosition().x, 0.01);
+    } else if (pos_y >= WINDOW_SIZE_Y - size_y / 2) {
+        mPlayer.setPosition(mPlayer.getPosition().x, WINDOW_SIZE_Y - size_y - 0.01);
+    }
+
 }
 
 void Game::render() {
