@@ -1,7 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "../Resources/resource_holder.hpp"
+#include "../Resources/ResourceHolder.hpp"
 #include <SFML/Graphics.hpp>
 
 #include "../Utils/FpsCounter.hpp"
