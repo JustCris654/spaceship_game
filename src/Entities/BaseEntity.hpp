@@ -3,7 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class BaseEntity {
+#include "../SceneNode/SceneNode.hpp"
+
+class BaseEntity: public SceneNode {
     public:
         void setVelocity(sf::Vector2f velocity);
         void setVelocity(float vx, float vy);

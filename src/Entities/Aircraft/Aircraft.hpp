@@ -12,9 +12,11 @@ class Aircraft : public BaseEntity {
 
   public:
     explicit Aircraft(Type type);
+    virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
   private:
     Type m_Type;
+    sf::Sprite m_Sprite;
 };
 
 #endif // AIRCRAFT_H_
