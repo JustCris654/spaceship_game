@@ -6,15 +6,9 @@ const float WINDOW_SIZE_Y = 960;
 
 Game::Game()
     : mWindow(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "Spaceship game"),
-      mTexture(),
-      mPlayer(),
-      mLandScape(),
-      m_FpsCounter(),
-      textures(),
-      mIsMovingUp{false},
-      mIsMovingDown{false},
-      mIsMovingRight{false},
-      mIsMovingLeft{false} {
+      mTexture(), mPlayer(), mLandScape(), m_FpsCounter(),
+      textures(), mIsMovingUp{false}, mIsMovingDown{false},
+      mIsMovingRight{false}, mIsMovingLeft{false} {
 
     textures.load(Textures::Airplane, "src/Media/Textures/Eagle.png");
     textures.load(Textures::Missile, "src/Media/Textures/Missile.png");
@@ -32,7 +26,7 @@ Game::Game()
 
 void Game::run() {
     sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    sf::Time  timeSinceLastUpdate = sf::Time::Zero;
     while (mWindow.isOpen()) {
         processEvents();
 
@@ -59,9 +53,10 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
         mIsMovingDown = isPressed;
     } else if (key == sf::Keyboard::A || key == sf::Keyboard::Left) {
         mIsMovingLeft = isPressed;
-    } else if (isPressed == false &&
-               key ==
-                   sf::Keyboard::Escape) {  // pressing ESC will close the game
+    } else if (isPressed == false && key == sf::Keyboard::Escape) { // pressing
+                                                                    // ESC will
+                                                                    // close the
+                                                                    // game
         mWindow.close();
     }
 }
@@ -70,18 +65,18 @@ void Game::processEvents() {
     sf::Event event;
     while (mWindow.pollEvent(event)) {
         switch (event.type) {
-            case sf::Event::KeyPressed:
-                handlePlayerInput(event.key.code, true);
-                break;
-            case sf::Event::KeyReleased:
-                handlePlayerInput(event.key.code, false);
-                break;
-            case sf::Event::Closed:
-                mWindow.close();
-                break;
+        case sf::Event::KeyPressed:
+            handlePlayerInput(event.key.code, true);
+            break;
+        case sf::Event::KeyReleased:
+            handlePlayerInput(event.key.code, false);
+            break;
+        case sf::Event::Closed:
+            mWindow.close();
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 }
@@ -109,12 +104,14 @@ void Game::update(sf::Time dt) {
     float pos_x = mPlayer.getPosition().x + size_x / 2;
     float pos_y = mPlayer.getPosition().y + size_y / 2;
 
-    // std::cout << "size_x: " << size_x << " - size_y: " << size_y << std::endl;
-    // std::cout << "x: " << pos_x << " - y: " << pos_y << std::endl;
-    // std::cout << "abs x: " << mPlayer.getPosition().x << " - abs y: " << mPlayer.getPosition().y << std::endl;
+    // std::cout << "size_x: " << size_x << " - size_y: " << size_y <<
+    // std::endl; std::cout << "x: " << pos_x << " - y: " << pos_y << std::endl;
+    // std::cout << "abs x: " << mPlayer.getPosition().x << " - abs y: " <<
+    // mPlayer.getPosition().y << std::endl;
 
     if (pos_x <= 1) {
-        mPlayer.setPosition(WINDOW_SIZE_X - size_x / 2 - 1, mPlayer.getPosition().y);
+        mPlayer.setPosition(
+            WINDOW_SIZE_X - size_x / 2 - 1, mPlayer.getPosition().y);
     } else if (pos_x >= WINDOW_SIZE_X) {
         mPlayer.setPosition(-size_x / 2 + 1, mPlayer.getPosition().y);
     }
@@ -122,9 +119,9 @@ void Game::update(sf::Time dt) {
     if (pos_y <= 32) {
         mPlayer.setPosition(mPlayer.getPosition().x, 0.01);
     } else if (pos_y >= WINDOW_SIZE_Y - size_y / 2) {
-        mPlayer.setPosition(mPlayer.getPosition().x, WINDOW_SIZE_Y - size_y - 0.01);
+        mPlayer.setPosition(
+            mPlayer.getPosition().x, WINDOW_SIZE_Y - size_y - 0.01);
     }
-
 }
 
 void Game::render() {

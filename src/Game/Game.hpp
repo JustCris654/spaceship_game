@@ -1,28 +1,28 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include <SFML/Graphics.hpp>
 #include "../Resources/resource_holder.hpp"
+#include <SFML/Graphics.hpp>
 
 #include "../Utils/FpsCounter.hpp"
 
 class Game {
-   public:
+  public:
     Game();
     void run();
 
-   private:
+  private:
     void processEvents();
     void update(sf::Time);
     void render();
 
     void handlePlayerInput(sf::Keyboard::Key, bool);
 
-   private:
+  private:
     sf::RenderWindow mWindow;
-    sf::Texture mTexture;
-    sf::Sprite mPlayer;
-    sf::Sprite mLandScape;
+    sf::Texture      mTexture;
+    sf::Sprite       mPlayer;
+    sf::Sprite       mLandScape;
 
     FpsCounter m_FpsCounter;
 
@@ -33,8 +33,8 @@ class Game {
     bool mIsMovingRight;
     bool mIsMovingLeft;
 
-    const float PlayerSpeed{600.f};
+    const float    PlayerSpeed{600.f};
     const sf::Time TimePerFrame{sf::seconds(1.f / 120.f)};
 };
 
-#endif  // GAME_H_
+#endif // GAME_H_

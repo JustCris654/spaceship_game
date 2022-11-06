@@ -6,16 +6,17 @@
 class Aircraft : public BaseEntity {
   public:
     enum Type {
-      Eagle,
-      Raptor,
+        Eagle,
+        Raptor,
     };
 
   public:
     explicit Aircraft(Type type);
-    virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+    virtual void
+    drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 
   private:
-    Type m_Type;
+    Type       m_Type;
     sf::Sprite m_Sprite;
 };
 
