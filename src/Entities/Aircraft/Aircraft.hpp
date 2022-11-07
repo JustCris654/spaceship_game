@@ -1,8 +1,8 @@
 #ifndef AIRCRAFT_H_
 #define AIRCRAFT_H_
 
-#include "../BaseEntity.hpp"
 #include "../../Resources/textures.hpp"
+#include "../BaseEntity.hpp"
 
 class Aircraft : public BaseEntity {
   public:
@@ -12,7 +12,7 @@ class Aircraft : public BaseEntity {
     };
 
   public:
-    explicit Aircraft(Type type, TextureHolder& textures);
+    explicit Aircraft(Type type, TextureHolder &textures);
     virtual void
     drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
 
