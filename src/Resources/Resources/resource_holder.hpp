@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "textures.hpp"
+#include "../Textures/textures.hpp"
 
 #include <assert.h>
 #include <iostream>
@@ -18,8 +18,9 @@ template <typename Resource, typename Identifier> class ResourceHolder {
     void load(Identifier id, const std::string &filename);
     // load resources with loadFromFile with a second parameter
     template <typename Parameter>
-    void load(Identifier id, const std::string &filename, Parameter secondaram);
-    Resource &      get(Identifier id);
+    void
+    load(Identifier id, const std::string &filename, Parameter secondParam);
+    Resource       &get(Identifier id);
     const Resource &get(Identifier id) const;
 
   private:

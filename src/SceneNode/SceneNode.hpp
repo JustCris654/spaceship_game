@@ -26,7 +26,7 @@ class SceneNode : public sf::Transformable,
 
   private:
     std::vector<Ptr> m_Children;
-    SceneNode *      m_Parent;
+    SceneNode       *m_Parent;
 };
 
 #endif // SCENENODE_H_
