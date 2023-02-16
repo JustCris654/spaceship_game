@@ -1,8 +1,7 @@
 #ifndef AIRCRAFT_H_
 #define AIRCRAFT_H_
 
-#include "../../Resources/Textures/TextureHolder.hpp"
-#import "../../Resources/Textures/textures.hpp"
+#import "../../Resources/ResourceIdentifiers.hpp"
 #include "../BaseEntity.hpp"
 
 class Aircraft : public BaseEntity {

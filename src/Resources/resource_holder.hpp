@@ -1,9 +1,9 @@
-#ifndef TEXTURE_HOLDER_H_
-#define TEXTURE_HOLDER_H_
+#ifndef RESOURCE_HOLDER_H_
+#define RESOURCE_HOLDER_H_
 
 #include <SFML/Graphics.hpp>
 
-#include "../Textures/textures.hpp"
+#include "../Resources/ResourceIdentifiers.hpp"
 
 #include <assert.h>
 #include <iostream>
