@@ -24,7 +24,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
     }
 
     auto inserted = mResourceMap.insert(std::make_pair(id, std::move(resource)));
-    assert(inserted.second);
+    assert(inserted.second);    // if inserted.second is false it does mean the insert went wrong
 }
 
 // insert a resource in the map object using loadFromFile with 2 parameters
@@ -39,7 +39,7 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
     }
 
     auto inserted = mResourceMap.insert(std::make_pair(id, std::move(resource)));
-    assert(inserted.second);
+    assert(inserted.second);    // if inserted.second is false it does mean the insert went wrong
 }
 
 // given the id return the associated resource

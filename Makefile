@@ -45,7 +45,7 @@ $(OBJDIR)/main.o: src/main.cpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/main.cpp -o $(OBJDIR)/main.o
 
 clean:
-	rm build/objs/*.o build/spaceship_game
+	rm -f build/objs/*.o build/spaceship_game
 
 cleanobj:
-	rm build/objs/*.o
+	rm -f build/objs/*.o

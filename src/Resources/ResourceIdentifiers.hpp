@@ -1,17 +1,27 @@
 #ifndef RESOURCES_RESOURCEIDENTIFIER_HPP
 #define RESOURCES_RESOURCEIDENTIFIER_HPP
 
-namespace Textures {
-enum ID { Landscape, Airplane, Missile, Eagle, Raptor };
-} // namespace Textures
+// Forward declaration of SFML classes
+namespace sf
+{
+    class Texture;
+}
 
-namespace  sf {
-class Texture;
-} // Forward declaration of SFML texture class
+namespace Textures
+{
+    enum ID
+    {
+        Eagle,
+        Raptor,
+        Desert,
+        Missile,
+    };
+}
 
-// copy template declaration of resource holder to define TextureHolder type
-template<typename Resource, typename Identifier>
+// Forward declaration and a few type definitions
+template <typename Resource, typename Identifier>
 class ResourceHolder;
+
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
 
 #endif // RESOURCES_RESOURCEIDENTIFIER_HPP

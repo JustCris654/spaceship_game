@@ -10,16 +10,16 @@ Game::Game()
       textures(), mIsMovingUp{false}, mIsMovingDown{false},
       mIsMovingRight{false}, mIsMovingLeft{false} {
 
-    textures.load(Textures::Airplane, "src/Media/Textures/Eagle.png");
+    textures.load(Textures::Eagle, "src/Media/Textures/Eagle.png");
     textures.load(Textures::Missile, "src/Media/Textures/Missile.png");
-    textures.load(Textures::Landscape, "src/Media/Textures/Desert.png");
+    textures.load(Textures::Desert, "src/Media/Textures/Desert.png");
 
     // set player texture
-    mPlayer.setTexture(textures.get(Textures::Airplane));
+    mPlayer.setTexture(textures.get(Textures::Eagle));
     mPlayer.setPosition(WINDOW_SIZE_X / 2, WINDOW_SIZE_Y / 2);
 
     // set landscape texture
-    mLandScape.setTexture(textures.get(Textures::Landscape));
+    mLandScape.setTexture(textures.get(Textures::Desert));
     mLandScape.setPosition(0.f, 0.f);
     mLandScape.setScale(1.3, 1.3);
 }
