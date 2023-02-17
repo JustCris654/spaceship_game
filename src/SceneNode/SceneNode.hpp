@@ -1,6 +1,8 @@
 #ifndef SCENENODE_H_
 #define SCENENODE_H_
 
+#include "SFML/Graphics/Transform.hpp"
+#include "SFML/System/Vector2.hpp"
 #include <SFML/Graphics.hpp>
 
 #include <assert.h>
@@ -16,13 +18,18 @@ class SceneNode : public sf::Transformable,
   public:
     SceneNode();
     ~SceneNode();
-    void attachChild(Ptr child);
-    Ptr  detachChild(const SceneNode &node);
+    void          attachChild(Ptr child);
+    Ptr           detachChild(const SceneNode &node);
+    void          update(sf::Time dt);
+    sf::Vector2f  getWorldPosition();
 
   private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     virtual void
     drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
+    virtual void updateCurrent(sf::Time dt);
+    void         updateChildren(sf::Time dt);
+    sf::Transform getWorldTransform();
 
   private:
     std::vector<Ptr> m_Children;
