@@ -4,7 +4,6 @@
 #import "../../Resources/resource_holder.hpp"
 #include "../BaseEntity.hpp"
 
-
 class Aircraft : public BaseEntity {
   public:
     enum Type { Eagle, Raptor };

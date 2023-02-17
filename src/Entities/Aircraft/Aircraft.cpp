@@ -1,4 +1,5 @@
 #include "Aircraft.hpp"
+#include "SFML/Graphics/Rect.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -16,7 +17,10 @@ Textures::ID toTextureId(Aircraft::Type type) {
 
 Aircraft::Aircraft(Type type, TextureHolder &textures)
     : m_Type(type), m_Sprite(textures.get(toTextureId(type))) {
-    }   
+
+    sf::FloatRect bounds = m_Sprite.getLocalBounds();
+    m_Sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+}
 
 void Aircraft::drawCurrent(
     sf::RenderTarget &target, sf::RenderStates states) const {
