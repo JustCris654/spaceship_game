@@ -12,3 +12,7 @@ void BaseEntity::setVelocity(float vx, float vy) {
 sf::Vector2f BaseEntity::getVelocity() const {
     return m_Velocity;
 }
+
+void BaseEntity::updateCurrent(sf::Time dt) {
+    move(m_Velocity * dt.asSeconds());
+}

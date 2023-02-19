@@ -13,6 +13,7 @@ class BaseEntity : public SceneNode {
 
   private:
     sf::Vector2f m_Velocity;
+    virtual void updateCurrent(sf::Time dt);
 };
 
 #endif // ENTITY_H_
