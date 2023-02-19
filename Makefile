@@ -23,8 +23,14 @@ endif
 OBJDIR = build/objs
 
 
-output: $(OBJDIR)/main.o $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o
-	$(CXX) $(CXXFLAGS) $(LINKEROPTIONS) -o build/spaceship_game $(OBJDIR)/main.o  $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o
+output: $(OBJDIR)/main.o $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o $(OBJDIR)/sprite_node.o $(OBJDIR)/world.o
+	$(CXX) $(CXXFLAGS) $(LINKEROPTIONS) -o build/spaceship_game $(OBJDIR)/main.o  $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o $(OBJDIR)/world.o
+
+$(OBJDIR)/world.o: src/World/World.cpp src/World/World.hpp
+	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/World/World.cpp -o $(OBJDIR)/world.o
+
+$(OBJDIR)/sprite_node.o: src/SceneNode/SpriteNode/SpriteNode.cpp src/SceneNode/SpriteNode/SpriteNode.hpp
+	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/SceneNode/SpriteNode/SpriteNode.cpp -o $(OBJDIR)/sprite_node.o
 
 $(OBJDIR)/scene_node.o: src/SceneNode/SceneNode.cpp src/SceneNode/SceneNode.hpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/SceneNode/SceneNode.cpp -o $(OBJDIR)/scene_node.o
