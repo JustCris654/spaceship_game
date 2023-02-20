@@ -6,11 +6,11 @@
 
 World::World(sf::RenderWindow &window)
     : m_Window(window), m_WorldView(window.getDefaultView()),
-      m_WorldBounds(0.f, 0.f, m_WorldView.getSize().x, 2000.f),
+      m_WorldBounds(0.f, 0.f, m_WorldView.getSize().x, 900000.f),
       m_SpawnPosition(
           m_WorldView.getSize().x / 2.f,
           m_WorldBounds.height - m_WorldView.getSize().y),
-      m_ScrollSpeed(-50.f), m_PlayerAircraft(nullptr) {
+      m_ScrollSpeed(-200.f), m_PlayerAircraft(nullptr) {
 
     loadTextures();
     buildScene();
@@ -52,7 +52,7 @@ void World::buildScene() {
     std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, m_Textures));
     m_PlayerAircraft = player.get();
     m_PlayerAircraft->setPosition(m_SpawnPosition);
-    m_PlayerAircraft->setVelocity(40.f, m_ScrollSpeed);
+    m_PlayerAircraft->setVelocity(0.f, m_ScrollSpeed);
     m_SceneLayers[Air]->attachChild(std::move(player));
 
     // escort of two airplanes relative to the player
@@ -76,15 +76,5 @@ void World::draw() {
 
 void World::update(sf::Time dt) {
     m_WorldView.move(0.f, m_ScrollSpeed * dt.asSeconds());
-
-    sf::Vector2f playerPosition = m_PlayerAircraft->getPosition();
-    sf::Vector2f playerVelocity = m_PlayerAircraft->getVelocity();
-
-    if (playerPosition.x <= m_WorldBounds.left + 150 ||
-        playerPosition.x >= m_WorldBounds.width - 150) {
-        playerVelocity.x = -playerVelocity.x;
-        m_PlayerAircraft->setVelocity(playerVelocity);
-    }
-
     m_SceneGraph.update(dt);
 }

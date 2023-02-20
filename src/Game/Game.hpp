@@ -5,8 +5,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "../Utils/FpsCounter.hpp"
+#include "../World/World.hpp"
+#include "SFML/Graphics/Font.hpp"
+#include "SFML/System/NonCopyable.hpp"
 
-class Game {
+class Game : private sf::NonCopyable {
   public:
     Game();
     void run();
@@ -16,24 +19,27 @@ class Game {
     void update(sf::Time);
     void render();
 
+    void updateStatistics(sf::Time);
     void handlePlayerInput(sf::Keyboard::Key, bool);
 
   private:
     sf::RenderWindow mWindow;
-    sf::Texture      mTexture;
-    sf::Sprite       mPlayer;
-    sf::Sprite       mLandScape;
+    World            m_World;
+    // FpsCounter       m_FpsCounter; // move this on the world class
 
-    FpsCounter m_FpsCounter;
+    // ResourceHolder<sf::Texture, Textures::ID> textures;
 
-    ResourceHolder<sf::Texture, Textures::ID> textures;
+    sf::Font m_Font;
+    sf::Text m_StatisticsText;
+    sf::Time m_StatisticsUpdateTime;
+    size_t   m_StatisticsNumberFrames;
 
     bool mIsMovingUp;
     bool mIsMovingDown;
     bool mIsMovingRight;
     bool mIsMovingLeft;
 
-    const float    PlayerSpeed{600.f};
+    // const float    PlayerSpeed{600.f};
     const sf::Time TimePerFrame{sf::seconds(1.f / 60.f)};
 };
 
