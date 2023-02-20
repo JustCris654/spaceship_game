@@ -24,7 +24,7 @@ OBJDIR = build/objs
 
 
 output: $(OBJDIR)/main.o $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o $(OBJDIR)/sprite_node.o $(OBJDIR)/world.o
-	$(CXX) $(CXXFLAGS) $(LINKEROPTIONS) -o build/spaceship_game $(OBJDIR)/main.o  $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o $(OBJDIR)/world.o
+	$(CXX) $(CXXFLAGS) $(LINKEROPTIONS) -o build/spaceship_game $(OBJDIR)/main.o  $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/sprite_node.o $(OBJDIR)/scene_node.o $(OBJDIR)/world.o
 
 $(OBJDIR)/world.o: src/World/World.cpp src/World/World.hpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/World/World.cpp -o $(OBJDIR)/world.o
