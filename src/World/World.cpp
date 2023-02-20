@@ -45,6 +45,7 @@ void World::buildScene() {
     // as the backgorund texture (the first to be drawn)
     std::unique_ptr<SpriteNode> backgroundSprite(
         new SpriteNode(texture, textureRect));
+    backgroundSprite->setScale({1.85f, 1.85f});
     backgroundSprite->setPosition(m_WorldBounds.left, m_WorldBounds.top);
     m_SceneLayers[Background]->attachChild(std::move(backgroundSprite));
 

@@ -5,8 +5,8 @@
 #include <sstream>
 #include <string>
 
-const float WINDOW_SIZE_X = 1280;
-const float WINDOW_SIZE_Y = 960;
+const float WINDOW_SIZE_X = 1920;
+const float WINDOW_SIZE_Y = 1440;
 
 Game::Game()
     : mWindow(
