@@ -29,10 +29,9 @@ class Game : private sf::NonCopyable {
 
     // ResourceHolder<sf::Texture, Textures::ID> textures;
 
-    sf::Font m_Font;
-    sf::Text m_StatisticsText;
-    sf::Time m_StatisticsUpdateTime;
-    size_t   m_StatisticsNumberFrames;
+    FpsCounter m_FpsCounter;
+    sf::Time   m_StatisticsUpdateTime;
+    size_t     m_StatisticsNumberFrames;
 
     bool mIsMovingUp;
     bool mIsMovingDown;
