@@ -18,10 +18,10 @@ class SceneNode : public sf::Transformable,
   public:
     SceneNode();
     ~SceneNode();
-    void          attachChild(Ptr child);
-    Ptr           detachChild(const SceneNode &node);
-    void          update(sf::Time dt);
-    sf::Vector2f  getWorldPosition();
+    void         attachChild(Ptr child);
+    Ptr          detachChild(const SceneNode &node);
+    void         update(sf::Time dt);
+    sf::Vector2f getWorldPosition();
 
     sf::Vector2f  getWorldPosition() const;
     sf::Transform getWorldTransform() const;
@@ -30,8 +30,8 @@ class SceneNode : public sf::Transformable,
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
     virtual void
     drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
-    virtual void updateCurrent(sf::Time dt);
-    void         updateChildren(sf::Time dt);
+    virtual void  updateCurrent(sf::Time dt);
+    void          updateChildren(sf::Time dt);
     sf::Transform getWorldTransform();
 
   private:

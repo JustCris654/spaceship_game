@@ -1,6 +1,5 @@
 #include "SpriteNode.hpp"
 
-
 SpriteNode::SpriteNode(const sf::Texture &texture) : m_Sprite(texture) {}
 
 SpriteNode::SpriteNode(
