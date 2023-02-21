@@ -1,7 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "../Resources/resource_holder.hpp"
+#include "../Utils/Resources/resource_holder.hpp"
 #include <SFML/Graphics.hpp>
 
 #include "../Utils/FpsCounter.hpp"
@@ -29,18 +29,18 @@ class Game : private sf::NonCopyable {
 
     // ResourceHolder<sf::Texture, Textures::ID> textures;
 
-    sf::Font m_Font;
-    sf::Text m_StatisticsText;
-    sf::Time m_StatisticsUpdateTime;
-    size_t   m_StatisticsNumberFrames;
+    FpsCounter m_FpsCounter;
+    sf::Time   m_StatisticsUpdateTime;
+    size_t     m_StatisticsNumberFrames;
 
     bool mIsMovingUp;
     bool mIsMovingDown;
     bool mIsMovingRight;
     bool mIsMovingLeft;
 
-    // const float    PlayerSpeed{600.f};
     const sf::Time TimePerFrame{sf::seconds(1.f / 60.f)};
+
+    Player m_Player;
 };
 
 #endif // GAME_H_

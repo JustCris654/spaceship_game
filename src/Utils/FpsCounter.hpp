@@ -4,8 +4,8 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-#include "../Resources/Fonts.hpp"
-#include "../Resources/resource_holder.hpp"
+#include "../Utils/Resources/Fonts.hpp"
+#include "../Utils/Resources/resource_holder.hpp"
 
 class FpsCounter {
   public:

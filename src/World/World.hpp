@@ -3,12 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System/NonCopyable.hpp>
+#include <algorithm>
 #include <array>
 
 #include "../Entities/Aircraft/Aircraft.hpp"
-#include "../Resources/ResourceIdentifiers.hpp"
+#include "../Player/Player.hpp"
 #include "../SceneNode/SceneNode.hpp"
 #include "../SceneNode/SpriteNode/SpriteNode.hpp"
+#include "../Utils/Resources/ResourceIdentifiers.hpp"
 
 class World : private sf::NonCopyable {
 
@@ -16,6 +18,8 @@ class World : private sf::NonCopyable {
     explicit World(sf::RenderWindow &window);
     void update(sf::Time dt);
     void draw();
+
+    CommandQueue &getCommandQueue();
 
   private:
     void loadTextures();
@@ -39,6 +43,8 @@ class World : private sf::NonCopyable {
     sf::Vector2f  m_SpawnPosition;
     float         m_ScrollSpeed;
     Aircraft     *m_PlayerAircraft;
+
+    CommandQueue m_CommandQueue;
 };
 
 #endif // WORLD_H_

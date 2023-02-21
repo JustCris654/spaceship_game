@@ -26,3 +26,16 @@ void Aircraft::drawCurrent(
     sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(m_Sprite, states);
 }
+
+unsigned int Aircraft::getCategory() const {
+    switch (m_Type) {
+    case Aircraft::Eagle:
+        return Category::PlayerAircraft;
+    default:
+        return Category::EnemyAircraft;
+    }
+}
+
+void Aircraft::accellerate(sf::Vector2f v) {
+    this->setVelocity(this->getVelocity() + v);
+}
