@@ -1,13 +1,16 @@
 #ifndef SCENENODE_H_
 #define SCENENODE_H_
 
-#include "SFML/Graphics/Transform.hpp"
-#include "SFML/System/Vector2.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Transform.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #include <assert.h>
 #include <memory>
 #include <vector>
+
+#include "../Utils/CommandQueue/CommandQueue.hpp"
+#include "SFML/System/Time.hpp"
 
 class SceneNode : public sf::Transformable,
                   public sf::Drawable,
@@ -23,8 +26,10 @@ class SceneNode : public sf::Transformable,
     void         update(sf::Time dt);
     sf::Vector2f getWorldPosition();
 
-    sf::Vector2f  getWorldPosition() const;
-    sf::Transform getWorldTransform() const;
+    sf::Vector2f         getWorldPosition() const;
+    sf::Transform        getWorldTransform() const;
+    virtual unsigned int getCategory() const;
+    void                 onCommand(const Command &, sf::Time);
 
   private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;

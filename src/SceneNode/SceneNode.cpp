@@ -63,3 +63,22 @@ sf::Transform SceneNode::getWorldTransform() {
 sf::Vector2f SceneNode::getWorldPosition() {
     return getWorldTransform() * sf::Vector2f();
 }
+
+// by default return scene category
+// this must be overrided in derived classes
+unsigned int SceneNode::getCategory() const {
+    return Category::Scene;
+}
+
+void SceneNode::onCommand(const Command &command, sf::Time dt) {
+
+    // bitwise AND between command category and the current
+    // scene node category
+    if (command.category & getCategory()) {
+        command.action(*this, dt);
+    }
+
+    for (Ptr &child : m_Children) {
+        child->onCommand(command, dt);
+    }
+}

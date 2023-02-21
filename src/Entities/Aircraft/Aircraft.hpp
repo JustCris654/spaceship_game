@@ -12,6 +12,7 @@ class Aircraft : public BaseEntity {
     explicit Aircraft(Type type, TextureHolder &textures);
     virtual void
     drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
+    virtual unsigned int getCategory() const;
 
   private:
     Type       m_Type;

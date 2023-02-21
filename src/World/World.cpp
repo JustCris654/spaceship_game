@@ -77,5 +77,15 @@ void World::draw() {
 
 void World::update(sf::Time dt) {
     m_WorldView.move(0.f, m_ScrollSpeed * dt.asSeconds());
+
+    // forward commands to the scene graph
+    while (!m_CommandQueue.isEmpty()) {
+        m_SceneGraph.onCommand(m_CommandQueue.pop(), dt);
+    }
+
     m_SceneGraph.update(dt);
+}
+
+CommandQueue &World::getCommandQueue() {
+    return m_CommandQueue;
 }
