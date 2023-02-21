@@ -1,5 +1,7 @@
 #include "Game.hpp"
 #include "SFML/System/Time.hpp"
+#include "SFML/Window/Event.hpp"
+#include "SFML/Window/Keyboard.hpp"
 #include "SFML/Window/WindowStyle.hpp"
 #include <iostream>
 #include <sstream>
@@ -13,7 +15,7 @@ Game::Game()
           sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "Spaceship game",
           sf::Style::Close),
       m_World(mWindow), m_FpsCounter("Initializing statistics..."),
-      m_StatisticsNumberFrames() {}
+      m_StatisticsNumberFrames(), m_Player() {}
 
 void Game::run() {
     sf::Clock clock;
@@ -56,23 +58,22 @@ void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 }
 
 void Game::processEvents() {
+    CommandQueue &commands = m_World.getCommandQueue();
+
     sf::Event event;
     while (mWindow.pollEvent(event)) {
-        switch (event.type) {
-        case sf::Event::KeyPressed:
-            handlePlayerInput(event.key.code, true);
-            break;
-        case sf::Event::KeyReleased:
-            handlePlayerInput(event.key.code, false);
-            break;
-        case sf::Event::Closed:
-            mWindow.close();
-            break;
+        m_Player.handleEvent(event, commands);
 
-        default:
-            break;
+        if (event.type == sf::Event::KeyPressed &&
+            event.key.code == sf::Keyboard::Escape) {
+            mWindow.close();
+        }
+        if (event.type == sf::Event::Closed) {
+            mWindow.close();
         }
     }
+
+    m_Player.handleRealTimeInput(commands);
 }
 
 void Game::update(sf::Time dt) {

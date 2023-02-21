@@ -10,7 +10,7 @@ World::World(sf::RenderWindow &window)
       m_SpawnPosition(
           m_WorldView.getSize().x / 2.f,
           m_WorldBounds.height - m_WorldView.getSize().y),
-      m_ScrollSpeed(-200.f), m_PlayerAircraft(nullptr) {
+      m_ScrollSpeed(-200.f), m_PlayerAircraft(nullptr), m_CommandQueue() {
 
     loadTextures();
     buildScene();
@@ -77,5 +77,15 @@ void World::draw() {
 
 void World::update(sf::Time dt) {
     m_WorldView.move(0.f, m_ScrollSpeed * dt.asSeconds());
+
+    // forward commands to the scene graph
+    while (!m_CommandQueue.isEmpty()) {
+        m_SceneGraph.onCommand(m_CommandQueue.pop(), dt);
+    }
+
     m_SceneGraph.update(dt);
+}
+
+CommandQueue &World::getCommandQueue() {
+    return m_CommandQueue;
 }
