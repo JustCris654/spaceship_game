@@ -7,9 +7,9 @@
 #include <array>
 
 #include "../Entities/Aircraft/Aircraft.hpp"
-#include "../Resources/ResourceIdentifiers.hpp"
 #include "../SceneNode/SceneNode.hpp"
 #include "../SceneNode/SpriteNode/SpriteNode.hpp"
+#include "../Utils/Resources/ResourceIdentifiers.hpp"
 
 class World : private sf::NonCopyable {
 

@@ -1,7 +1,7 @@
 #ifndef AIRCRAFT_H_
 #define AIRCRAFT_H_
 
-#import "../../Resources/resource_holder.hpp"
+#include "../../Utils/Resources/resource_holder.hpp"
 #include "../BaseEntity.hpp"
 
 class Aircraft : public BaseEntity {

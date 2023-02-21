@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Resources/ResourceIdentifiers.hpp"
+#include "./ResourceIdentifiers.hpp"
 
 #include <assert.h>
 #include <iostream>
