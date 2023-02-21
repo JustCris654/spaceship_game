@@ -7,6 +7,7 @@
 #include <array>
 
 #include "../Entities/Aircraft/Aircraft.hpp"
+#include "../Player/Player.hpp"
 #include "../SceneNode/SceneNode.hpp"
 #include "../SceneNode/SpriteNode/SpriteNode.hpp"
 #include "../Utils/Resources/ResourceIdentifiers.hpp"

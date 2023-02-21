@@ -38,8 +38,9 @@ class Game : private sf::NonCopyable {
     bool mIsMovingRight;
     bool mIsMovingLeft;
 
-    // const float    PlayerSpeed{600.f};
     const sf::Time TimePerFrame{sf::seconds(1.f / 60.f)};
+
+    Player m_Player;
 };
 
 #endif // GAME_H_

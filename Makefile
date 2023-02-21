@@ -23,8 +23,11 @@ endif
 OBJDIR = build/objs
 
 
-output: $(OBJDIR)/main.o $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o $(OBJDIR)/sprite_node.o $(OBJDIR)/world.o $(OBJDIR)/command_queue.o
-	$(CXX) $(CXXFLAGS) $(LINKEROPTIONS) -o build/spaceship_game $(OBJDIR)/main.o  $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/sprite_node.o $(OBJDIR)/scene_node.o $(OBJDIR)/world.o $(OBJDIR)/command_queue.o
+output: $(OBJDIR)/main.o $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/scene_node.o $(OBJDIR)/sprite_node.o $(OBJDIR)/world.o $(OBJDIR)/command_queue.o $(OBJDIR)/player.o
+	$(CXX) $(CXXFLAGS) $(LINKEROPTIONS) -o build/spaceship_game $(OBJDIR)/main.o  $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/sprite_node.o $(OBJDIR)/scene_node.o $(OBJDIR)/world.o $(OBJDIR)/command_queue.o $(OBJDIR)/player.o
+
+$(OBJDIR)/player.o: src/Player/Player.cpp src/Player/Player.hpp
+	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/Player/Player.cpp -o $(OBJDIR)/player.o
 
 $(OBJDIR)/command_queue.o: src/Utils/CommandQueue/CommandQueue.cpp src/Utils/CommandQueue/CommandQueue.hpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/Utils/CommandQueue/CommandQueue.cpp -o $(OBJDIR)/command_queue.o
