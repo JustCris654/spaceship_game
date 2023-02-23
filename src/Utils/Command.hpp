@@ -1,8 +1,12 @@
-#include <cassert>
-class SceneNode;
+#ifndef COMMAND_H_
+#define COMMAND_H_
+
 #include "Categories.hpp"
 #include <SFML/System/Time.hpp>
+#include <cassert>
 #include <functional>
+
+class SceneNode;
 
 struct Command {
     Command() {
@@ -22,3 +26,5 @@ std::function<void(SceneNode &node, sf::Time dt)> derivedAction(Function fn) {
         fn(static_cast<GameObj &>(node), dt);
     };
 }
+
+#endif // COMMAND_H_

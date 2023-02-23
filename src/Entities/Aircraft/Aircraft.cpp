@@ -35,7 +35,3 @@ unsigned int Aircraft::getCategory() const {
         return Category::EnemyAircraft;
     }
 }
-
-void Aircraft::accellerate(sf::Vector2f v) {
-    this->setVelocity(this->getVelocity() + v);
-}

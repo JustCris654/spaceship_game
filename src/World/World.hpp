@@ -24,6 +24,8 @@ class World : private sf::NonCopyable {
   private:
     void loadTextures();
     void buildScene();
+    void adaptPlayerVelocity();
+    void adaptPlayerPosition();
 
   private:
     enum Layer {

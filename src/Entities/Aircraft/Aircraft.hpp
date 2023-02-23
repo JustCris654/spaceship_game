@@ -14,7 +14,6 @@ class Aircraft : public BaseEntity {
     virtual void
     drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
     virtual unsigned int getCategory() const;
-    void                 accellerate(sf::Vector2f);
 
   private:
     Type       m_Type;

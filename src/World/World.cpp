@@ -2,6 +2,8 @@
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/Texture.hpp"
 #include "SFML/System/Vector2.hpp"
+#include <algorithm>
+#include <cmath>
 #include <memory>
 
 World::World(sf::RenderWindow &window)
@@ -78,14 +80,47 @@ void World::draw() {
 void World::update(sf::Time dt) {
     m_WorldView.move(0.f, m_ScrollSpeed * dt.asSeconds());
 
+    m_PlayerAircraft->setVelocity(0.f, 0.f);
+
     // forward commands to the scene graph
     while (!m_CommandQueue.isEmpty()) {
         m_SceneGraph.onCommand(m_CommandQueue.pop(), dt);
     }
 
+    this->adaptPlayerVelocity();
+
     m_SceneGraph.update(dt);
+    this->adaptPlayerPosition();
 }
 
 CommandQueue &World::getCommandQueue() {
     return m_CommandQueue;
+}
+
+void World::adaptPlayerVelocity() {
+    sf::Vector2f velocity = m_PlayerAircraft->getVelocity();
+
+    if (velocity.x != 0 && velocity.y != 0) {
+        m_PlayerAircraft->setVelocity(velocity / std::sqrt(2.f));
+    }
+
+    m_PlayerAircraft->accellerate(0.f, m_ScrollSpeed);
+}
+
+void World::adaptPlayerPosition() {
+    sf::FloatRect viewBounds(
+        m_WorldView.getCenter() - m_WorldView.getSize() / 2.f,
+        m_WorldView.getSize());
+    const float borderDistance{40.f};
+
+    sf::Vector2f pos = m_PlayerAircraft->getPosition();
+    pos.x = std::max(pos.x, viewBounds.left + borderDistance);
+    pos.x =
+        std::min(pos.x, viewBounds.left + viewBounds.width - borderDistance);
+
+    pos.y = std::max(pos.y, viewBounds.top + borderDistance);
+    pos.y =
+        std::min(pos.y, viewBounds.top + viewBounds.height - borderDistance);
+
+    m_PlayerAircraft->setPosition(pos);
 }
