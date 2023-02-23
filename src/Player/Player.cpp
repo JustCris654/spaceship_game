@@ -9,9 +9,7 @@
 struct AircraftMover {
     AircraftMover(float vx, float vy) : velocity(vx, vy){};
 
-    void operator()(Aircraft &aircraft, sf::Time) const {
-        std::cout << "Accellerate -> X: " << velocity.x
-                  << " - Y: " << velocity.y << std::endl;
+    void operator()(Aircraft &aircraft, sf::Time dt) const {
         aircraft.accellerate(velocity);
     }
 
@@ -65,7 +63,7 @@ void Player::assignKey(sf::Keyboard::Key key, Action action) {
     m_KeyBinding[key] = action;
 }
 
-sf::Keyboard::Key Player::getAssignedKey(Action action) {
+sf::Keyboard::Key Player::getAssignedKey(Action action) const {
     for (auto pair : m_KeyBinding) {
         if (pair.second == action)
             return pair.first;
@@ -75,16 +73,19 @@ sf::Keyboard::Key Player::getAssignedKey(Action action) {
 }
 
 void Player::initializeActions() {
-    m_ActionBinding[MoveUp].action =
-        derivedAction<Aircraft>(AircraftMover(0.f, -m_PlayerSpeed));
-    m_ActionBinding[MoveDown].action =
-        derivedAction<Aircraft>(AircraftMover(0.f, +m_PlayerSpeed));
-    m_ActionBinding[MoveLeft].action =
-        derivedAction<Aircraft>(AircraftMover(-m_PlayerSpeed, 0.f));
-    m_ActionBinding[MoveRight].action =
-        derivedAction<Aircraft>(AircraftMover(+m_PlayerSpeed, 0.f));
-    m_ActionBinding[Shoot].action =
-        derivedAction<Aircraft>(AircraftMover(0.f, 0.f));
+    m_ActionBinding[MoveUp].action = [this](SceneNode &node, sf::Time dt) {
+        node.move(0.f, -m_PlayerSpeed * dt.asSeconds());
+    };
+    m_ActionBinding[MoveDown].action = [this](SceneNode &node, sf::Time dt) {
+        node.move(0.f, m_PlayerSpeed * dt.asSeconds());
+    };
+    m_ActionBinding[MoveLeft].action = [this](SceneNode &node, sf::Time dt) {
+        node.move(-m_PlayerSpeed * dt.asSeconds(), 0.f);
+    };
+    m_ActionBinding[MoveRight].action = [this](SceneNode &node, sf::Time dt) {
+        node.move(m_PlayerSpeed * dt.asSeconds(), 0.f);
+    };
+    m_ActionBinding[Shoot].action = [](SceneNode &node, sf::Time dt) {};
 }
 
 bool Player::isRealTimeAction(Action action) {

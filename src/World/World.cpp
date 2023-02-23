@@ -100,14 +100,9 @@ CommandQueue &World::getCommandQueue() {
 void World::adaptPlayerVelocity() {
     sf::Vector2f velocity = m_PlayerAircraft->getVelocity();
 
-    std::cout << "x: " << velocity.x << " - y: " << velocity.y << std::endl;
-
     if (velocity.x != 0 && velocity.y != 0) {
         m_PlayerAircraft->setVelocity(velocity / std::sqrt(2.f));
     }
-
-    std::cout << "SQUARED x: " << velocity.x << " - y: " << velocity.y
-              << std::endl;
 
     m_PlayerAircraft->accellerate(0.f, m_ScrollSpeed);
 }

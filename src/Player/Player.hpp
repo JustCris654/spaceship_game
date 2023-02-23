@@ -29,7 +29,7 @@ class Player {
     void handleRealTimeInput(CommandQueue &commands);
 
     void              assignKey(sf::Keyboard::Key key, Action action);
-    sf::Keyboard::Key getAssignedKey(Action action);
+    sf::Keyboard::Key getAssignedKey(Action action) const;
 
   private:
     void        initializeActions();
