@@ -30,6 +30,8 @@ class SceneNode : public sf::Transformable,
     sf::Transform        getWorldTransform() const;
     virtual unsigned int getCategory() const;
     void                 onCommand(const Command &, sf::Time);
+    void                 accellerate(sf::Vector2f);
+    void                 accellerate(float vx, float vy);
 
   private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;

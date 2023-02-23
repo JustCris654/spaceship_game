@@ -10,20 +10,25 @@ struct AircraftMover {
     AircraftMover(float vx, float vy) : velocity(vx, vy){};
 
     void operator()(Aircraft &aircraft, sf::Time) const {
+        std::cout << "Accellerate -> X: " << velocity.x
+                  << " - Y: " << velocity.y << std::endl;
         aircraft.accellerate(velocity);
     }
 
     sf::Vector2f velocity;
 };
 
-struct AircraftBreak {
-    void operator()(Aircraft &aircraft, sf::Time) const {
-        aircraft.setVelocity(0.f, -200.f);
-    }
-};
-
 Player::Player() {
-    // do nothing
+    m_KeyBinding[sf::Keyboard::W] = MoveUp;
+    m_KeyBinding[sf::Keyboard::D] = MoveRight;
+    m_KeyBinding[sf::Keyboard::S] = MoveDown;
+    m_KeyBinding[sf::Keyboard::A] = MoveLeft;
+    m_KeyBinding[sf::Keyboard::Space] = Shoot;
+
+    initializeActions();
+
+    for (auto &pair : m_ActionBinding)
+        pair.second.category = Category::PlayerAircraft;
 }
 
 Player::~Player() {
@@ -31,62 +36,65 @@ Player::~Player() {
 }
 
 void Player::handleRealTimeInput(CommandQueue &commands) {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        Command moveUp;
-        moveUp.category = Category::PlayerAircraft;
-        moveUp.action =
-            derivedAction<Aircraft>(AircraftMover(0.f, -m_PlayerSpeed));
-
-        commands.push(moveUp);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        Command moveDown;
-        moveDown.category = Category::PlayerAircraft;
-        moveDown.action =
-            derivedAction<Aircraft>(AircraftMover(0.f, +m_PlayerSpeed));
-
-        commands.push(moveDown);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        Command moveLeft;
-        moveLeft.category = Category::PlayerAircraft;
-        moveLeft.action =
-            derivedAction<Aircraft>(AircraftMover(-m_PlayerSpeed, 0.f));
-
-        commands.push(moveLeft);
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        Command moveRight;
-        moveRight.category = Category::PlayerAircraft;
-        moveRight.action =
-            derivedAction<Aircraft>(AircraftMover(+m_PlayerSpeed, 0.f));
-
-        commands.push(moveRight);
+    for (auto pair : m_KeyBinding) {
+        if (sf::Keyboard::isKeyPressed(pair.first) &&
+            isRealTimeAction(pair.second))
+            commands.push(m_ActionBinding[pair.second]);
     }
 }
 
 void Player::handleEvent(const sf::Event &event, CommandQueue &commands) {
-    if (event.type == sf::Event::KeyPressed &&
-        event.key.code == sf::Keyboard::P) {
-        Command output;
-        output.category = Category::PlayerAircraft;
-        output.action = [](SceneNode &s, sf::Time) {
-            std::cout << "X: " << s.getPosition().x
-                      << " - Y: " << s.getPosition().y << std::endl;
-        };
-
-        commands.push(output);
+    if (event.type == sf::Event::KeyPressed) {
+        auto found = m_KeyBinding.find(event.key.code);
+        if (found != m_KeyBinding.end() && !isRealTimeAction(found->second))
+            commands.push(m_ActionBinding[found->second]);
     }
-    if (event.type == sf::Event::KeyPressed &&
-        event.key.code == sf::Keyboard::Space) {
-        Command breakPlayer;
-        breakPlayer.category = Category::PlayerAircraft;
-        breakPlayer.action =
-            derivedAction<Aircraft>([](Aircraft &aircraft, sf::Time) {
-                aircraft.setVelocity(0.f, -200.f);
-            });
+}
 
-        commands.push(breakPlayer);
+void Player::assignKey(sf::Keyboard::Key key, Action action) {
+
+    // remove all keys mapped to the action
+    for (auto itr = m_KeyBinding.begin(); itr != m_KeyBinding.end();) {
+        if (itr->second == action)
+            m_KeyBinding.erase(itr++);
+        else
+            itr++;
+    }
+
+    // add new key binding to action
+    m_KeyBinding[key] = action;
+}
+
+sf::Keyboard::Key Player::getAssignedKey(Action action) {
+    for (auto pair : m_KeyBinding) {
+        if (pair.second == action)
+            return pair.first;
+    }
+
+    return sf::Keyboard::Unknown;
+}
+
+void Player::initializeActions() {
+    m_ActionBinding[MoveUp].action =
+        derivedAction<Aircraft>(AircraftMover(0.f, -m_PlayerSpeed));
+    m_ActionBinding[MoveDown].action =
+        derivedAction<Aircraft>(AircraftMover(0.f, +m_PlayerSpeed));
+    m_ActionBinding[MoveLeft].action =
+        derivedAction<Aircraft>(AircraftMover(-m_PlayerSpeed, 0.f));
+    m_ActionBinding[MoveRight].action =
+        derivedAction<Aircraft>(AircraftMover(+m_PlayerSpeed, 0.f));
+    m_ActionBinding[Shoot].action =
+        derivedAction<Aircraft>(AircraftMover(0.f, 0.f));
+}
+
+bool Player::isRealTimeAction(Action action) {
+    switch (action) {
+    case MoveUp:
+    case MoveRight:
+    case MoveDown:
+    case MoveLeft:
+        return true;
+    default:
+        return false;
     }
 }
