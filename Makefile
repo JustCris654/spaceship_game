@@ -28,11 +28,11 @@ output: $(OBJDIR)/main.o $(OBJDIR)/game.o $(OBJDIR)/base_entity.o $(OBJDIR)/airc
 	$(OBJDIR)/aircraft.o $(OBJDIR)/fps_counter.o $(OBJDIR)/sprite_node.o $(OBJDIR)/scene_node.o $(OBJDIR)/world.o $(OBJDIR)/command_queue.o \
 	$(OBJDIR)/player.o $(OBJDIR)/state.o $(OBJDIR)/state_stack.o
 
-$(OBJDIR)/state.o: src/Utils/StateStack/State/State.cpp src/Utils/StateStack/State/State.hpp
-	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/Utils/StateStack/State/State.cpp -o $(OBJDIR)/state.o
+$(OBJDIR)/state.o: src/States/StateStack/State/State.cpp src/States/StateStack/State/State.hpp
+	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/States/StateStack/State/State.cpp -o $(OBJDIR)/state.o
 
-$(OBJDIR)/state_stack.o: src/Utils/StateStack/StateStack.cpp src/Utils/StateStack/StateStack.hpp
-	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/Utils/StateStack/StateStack.cpp -o $(OBJDIR)/state_stack.o
+$(OBJDIR)/state_stack.o: src/States/StateStack/StateStack.cpp src/States/StateStack/StateStack.hpp
+	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/States/StateStack/StateStack.cpp -o $(OBJDIR)/state_stack.o
 
 $(OBJDIR)/player.o: src/Player/Player.cpp src/Player/Player.hpp
 	$(CXX) $(CXXFLAGS) $(SFMLFLAGS) -c src/Player/Player.cpp -o $(OBJDIR)/player.o

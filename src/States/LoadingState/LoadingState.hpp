@@ -1,0 +1,4 @@
+#ifndef LOADINGSTATE_H_
+#define LOADINGSTATE_H_
+
+#endif // LOADINGSTATE_H_

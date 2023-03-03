@@ -13,6 +13,7 @@ enum ID {
     Raptor,
     Desert,
     Missile,
+    TitleScreen,
 };
 }
 

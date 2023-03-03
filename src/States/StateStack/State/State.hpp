@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "../../Resources/ResourceIdentifiers.hpp"
+#include "../../../Utils/Resources/resource_holder.hpp"
 #include "../StateIdentifiers.hpp"
 
 class StateStack;

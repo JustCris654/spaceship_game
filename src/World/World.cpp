@@ -24,6 +24,7 @@ void World::loadTextures() {
     m_Textures.load(Textures::Eagle, "src/Media/Textures/Eagle.png");
     m_Textures.load(Textures::Raptor, "src/Media/Textures/Raptor.png");
     m_Textures.load(Textures::Desert, "src/Media/Textures/Desert.png");
+    m_Textures.load(Textures::TitleScreen, "src/Media/Textures/MenuBg.jpg");
 }
 
 void World::buildScene() {
